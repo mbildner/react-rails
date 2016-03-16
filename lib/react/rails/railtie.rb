@@ -93,6 +93,9 @@ module React
         if Gem::Version.new(Sprockets::VERSION) >= Gem::Version.new("3.0.0")
           sprockets_env.register_mime_type("application/jsx", extensions: [".jsx", ".js.jsx", ".es.jsx", ".es6.jsx"])
           sprockets_env.register_transformer("application/jsx", "application/javascript", React::JSX::Processor)
+          
+          sprockets_env.register_mime_type("application/javascript", extensions: [".js"])
+          sprockets_env.register_transformer("application/javascript", "application/javascript", React::JSX::BabelTransformer)
         else
           sprockets_env.register_engine(".jsx", React::JSX::Template)
         end
